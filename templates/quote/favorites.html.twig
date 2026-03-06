@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Favoris{% endblock %}
+
+{% block body %}
+<h1>Mes favoris ⭐</h1>
+
+{% if quotes is empty %}
+  <p>Tu n’as pas encore de favoris. Va sur <a href="{{ path('quote_list') }}">la liste</a> 🙂</p>
+{% else %}
+  <ul style="display:grid; gap:12px; padding-left:0; list-style:none;">
+    {% for quote in quotes %}
+      <li class="card" style="padding:16px;">
+        <p style="margin:0 0 6px 0; font-size:18px;">
+          <strong>{{ quote.title }}</strong> — “{{ quote.content }}”
+        </p>
+        <p style="margin:0; color: var(--muted);">
+          {% if quote.author %}— {{ quote.author }}{% else %}— New Daily Boost{% endif %}
+        </p>
+
+        <div style="margin-top:10px;">
+          <a class="btn" href="{{ path('quote_toggle_favorite', {id: quote.id}) }}">⭐ Retirer des favoris</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

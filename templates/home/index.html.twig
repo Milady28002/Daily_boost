@@ -1,0 +1,83 @@
+{# templates/home/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil · New Daily Boost{% endblock %}
+
+{% block body %}
+<section class="hero">
+
+    <h1>New Daily Boost</h1>
+
+    <p class="lead">
+        New Daily Boost est mon petit terrain d’entraînement Symfony : une appli simple,
+        pensée pour pratiquer sans stress. Le principe : enregistrer des citations,
+        en afficher une au hasard, et garder ses favorites pour les jours “bof”.
+    </p>
+
+    <div class="cta-row">
+        <a class="btn primary" href="{{ path('quote_new')}}">Ajouter une citation</a>
+        <a class="btn" href="{{ path('quote_random') }}">
+            Inspire-moi ✨
+        </a>
+
+        <a class="btn" href="#">Favoris</a>
+    </div>
+        <div class="card" style="grid-column: span 12; border-left: 6px solid rgba(79,125,105,.35);">
+        <h3>La petite dose du jour</h3>
+
+        {% if quote %}
+
+            <p style="margin-top:8px; font-size:18px; color: rgba(43,43,43,.82);">
+                <strong>{{ quote.title }}</strong> — “{{ quote.content }}”
+            </p>
+
+            {% if quote.author %}
+                <p style="margin-top:6px; color: var(--muted);">— {{ quote.author }}</p>
+            {% else %}
+                <p style="margin-top:6px; color: var(--muted);">— version bêta mais déjà utile</p>
+            {% endif %}
+
+            <p style="margin-top:8px; color: var(--muted); font-size:14px;">
+            {{ count|default(0) }} citations dans ta bibliothèque 
+            </p>
+
+        {% else %}
+
+            <p style="margin-top:8px;">
+                Aucune citation pour le moment. Ajoutes-en une 🙂
+            </p>
+
+        {% endif %}
+
+</div>
+    <div class="grid">
+
+  <div class="card">
+    <h3>Bibliothèque</h3>
+    <p><strong>{{ count }}</strong> citations enregistrées</p>
+  </div>
+
+  <div class="card">
+    <h3>Favoris</h3>
+    <p><strong>{{ favoritesCount }}</strong> citations ⭐</p>
+    <a class="btn" href="{{ path('quote_favorites') }}">Voir mes favoris</a>
+  </div>
+
+  <div class="card">
+    <h3>Dernière ajoutée</h3>
+    {% if lastQuote %}
+      <p><strong>{{ lastQuote.title }}</strong></p>
+      <p style="color: var(--muted); margin-top:6px;">
+        {{ lastQuote.createdAt|date('d/m/Y H:i') }}
+      </p>
+    {% else %}
+      <p style="color: var(--muted);">Aucune citation pour le moment.</p>
+    {% endif %}
+    <a class="btn" href="{{ path('quote_new') }}">Ajouter une citation</a>
+  </div>
+
+</div>
+   
+    </div>
+</section>
+{% endblock %}

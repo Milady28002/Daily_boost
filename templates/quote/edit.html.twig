@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une citation{% endblock %}
+
+{% block body %}
+    <h1>Modifier une citation</h1>
+
+    <p style="margin-bottom: 18px; color: var(--muted);">
+        modifier : <strong>{{ quote.title }}</strong>
+    </p>
+
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.content) }}
+        {{ form_row(form.author) }}
+
+        <button type="submit" class="btn primary">Enregistrer les modifications</button>
+    {{ form_end(form) }}
+{% endblock %}
