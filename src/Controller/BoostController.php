@@ -153,4 +153,18 @@ class BoostController extends AbstractController
 
             return $this->redirectToRoute('quote_list');
     }
+
+    #[Route('/stats', name: 'quote_stats')]
+    public function stats(QuoteRepository $quoteRepository): Response
+    {
+        $total = $quoteRepository->count([]);
+        $favorites = $quoteRepository->count(['isFavorite' => true]);
+        $lastQuote = $quoteRepository->findOneBy([], ['createdAt' => 'DESC']);
+
+        return $this->render('quote/stats.html.twig', [
+            'total' => $total,
+            'favorites' => $favorites,
+            'lastQuote' => $lastQuote,
+        ]);
+    }
 }
