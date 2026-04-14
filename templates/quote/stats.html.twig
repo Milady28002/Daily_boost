@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+
+<h1>📊 Statistiques</h1>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>Total de citations</h3>
+        <p>{{ total }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Favoris</h3>
+        <p>{{ favorites }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Dernière citation</h3>
+        {% if lastQuote %}
+            <p><strong>{{ lastQuote.title }}</strong></p>
+            <p style="color: var(--muted);">
+                {{ lastQuote.createdAt|date('d/m/Y H:i') }}
+            </p>
+        {% else %}
+            <p>Aucune donnée</p>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}
