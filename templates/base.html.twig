@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}New Daily Boost{% endblock %}</title>
 
-    <style>
+   <style>
         :root{
             --bg: #fbf7f1;          /* crème */
             --card: #ffffff;        /* blanc chaud */
@@ -20,7 +20,7 @@
             --radius: 18px;
         }
 
-        *{ box-sizing: border-box; }
+       *{ box-sizing: border-box; }
 
         body{
             margin:0;
@@ -161,6 +161,244 @@
             border-radius: 8px;
             margin-bottom: 20px;
         }
+        .main-nav{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:24px;
+            padding:18px 0;
+        }
+
+        .nav-left,
+        .nav-right{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            flex-wrap:wrap;
+        }
+
+        .nav-brand{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            font-weight:700;
+            white-space:nowrap;
+        }
+
+        .brand-dot{
+            width:12px;
+            height:12px;
+            border-radius:50%;
+            background:linear-gradient(135deg, var(--accent), var(--accent2));
+            box-shadow:0 0 0 5px rgba(79,125,105,.12);
+        }
+
+        .user-info{
+            color:var(--muted);
+            font-size:14px;
+        }
+
+        @media (max-width:700px){
+            .container{
+                width:92vw;
+            }
+
+            .main-nav{
+                flex-direction:column;
+                align-items:center;
+                text-align:center;
+                gap:14px;
+            }
+
+            .nav-left,
+            .nav-right{
+                justify-content:center;
+                width:100%;
+            }
+
+            .hero{
+                padding:20px;
+                overflow:hidden;
+            }
+
+            .cta-row{
+                flex-direction:column;
+            }
+
+            .btn{
+                width:100%;
+                justify-content:center;
+                white-space:normal;
+            }
+
+            .grid{
+                grid-template-columns:1fr;
+            }
+
+            .card{
+                grid-column:span 1;
+                width:100%;
+                max-width:100%;
+            }
+
+            h1{
+                font-size:32px;
+            }
+        }
+
+       @media (max-width:700px){
+        .hero{
+            display:flex;
+            flex-direction:column;
+        }
+
+        .hero > *{
+            width:100%;
+            max-width:100%;
+        }
+
+        .cta-row{
+            display:flex;
+            flex-direction:column;
+            width:100%;
+        }
+
+        .cta-row .btn{
+            width:100%;
+            justify-content:center;
+        }
+
+        .lead{
+            max-width:100%;
+        }
+    } 
+    /* ===== Formulaires Connexion / Inscription ===== */
+
+        .auth-container{
+            display:flex;
+            justify-content:center;
+            margin-top:40px;
+        }
+
+        .auth-card{
+            width:100%;
+            max-width:500px;
+            padding:40px;
+            border-radius:20px;
+            background:rgba(255,255,255,.85);
+            border:1px solid var(--line);
+            box-shadow:var(--shadow);
+        }
+
+        .auth-card h1{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .form-group{
+            margin-bottom:20px;
+        }
+
+        .form-group label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:600;
+        }
+
+        .form-group input{
+            width:100%;
+            padding:12px 16px;
+            border:1px solid var(--line);
+            border-radius:14px;
+            background:white;
+            font-size:15px;
+        }
+
+        .remember-row{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            margin:25px 0;
+        }
+
+        .remember-row input{
+            width:auto;
+            margin:0;
+        }
+
+        .remember-row label{
+            margin:0;
+            cursor:pointer;
+        }
+
+        .auth-card .btn{
+            width:100%;
+            justify-content:center;
+        }
+
+        .flash-error{
+            background:#fde7e7;
+            color:#8d2f2f;
+            padding:12px;
+            border-radius:10px;
+            margin-bottom:20px;
+        }
+
+            .auth-card form > div{
+            margin-bottom:20px;
+        }
+
+        .auth-card form > div > label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:600;
+        }
+
+        .auth-card input{
+            width:100%;
+            display:block;
+            padding:12px 16px;
+            border:1px solid var(--line);
+            border-radius:14px;
+            background:white;
+            font-size:15px;
+        }
+
+        .auth-card input[type="checkbox"]{
+            width:auto;
+            display:inline-block;
+            padding:0;
+        }
+
+        .auth-card form > div{
+            margin-bottom:20px;
+        }
+
+        .auth-card form > div > label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:600;
+        }
+
+        .checkbox-row > div{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            margin:25px 0;
+        }
+
+        .checkbox-row input[type="checkbox"]{
+            width:auto;
+            margin:0;
+        }
+
+        .checkbox-row label{
+            margin:0;
+            cursor:pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -170,22 +408,32 @@
     </div>
 {% endfor %}
 <header class="container">
-    <nav class="nav">
-        <nav class="nav">
-        <a href="{{ path('home') }}">🏠 Accueil</a>
-        <a href="{{ path('quote_list') }}">📚 Toutes les citations</a>
-        <a href="{{ path('quote_favorites') }}">⭐ Favoris</a>
-        <a href="{{ path('quote_new') }}">➕ Ajouter</a>
-        <a href="{{ path('quote_stats') }}">📊 Stats</a>
-    </nav>
-        <div class="brand">
-            <span class="dot" aria-hidden="true"></span>
-            <span>New Daily Boost</span>
+    <nav class="main-nav">
+        <div class="nav-left">
+            <a href="{{ path('home') }}">🏠 Accueil</a>
+            <a href="{{ path('quote_list') }}">📚 Toutes les citations</a>
+            <a href="{{ path('quote_favorites') }}">⭐ Favoris</a>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('quote_new') }}">➕ Ajouter</a>
+            {% endif %}
+
+            <a href="{{ path('quote_stats') }}">📊 Stats</a>
         </div>
 
-        <div class="nav-links">
-            <a class="pill" href="{{ path('home') }}">Accueil</a>
-            {# On ajoutera plus tard : citations, favoris, etc. #}
+        <div class="nav-brand">
+            <span class="brand-dot"></span>
+            <strong>New Daily Boost</strong>
+        </div>
+
+        <div class="nav-right">
+            {% if app.user %}
+                <span class="user-info">{{ app.user.userIdentifier }}</span>
+                <a class="pill" href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+                <a class="pill" href="{{ path('app_login') }}">Connexion</a>
+                <a class="pill" href="{{ path('app_register') }}">Inscription</a>
+            {% endif %}
         </div>
     </nav>
 </header>

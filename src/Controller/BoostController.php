@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class BoostController extends AbstractController
 {
@@ -42,6 +43,7 @@ class BoostController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/quote/new', name: 'quote_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
@@ -123,7 +125,9 @@ class BoostController extends AbstractController
             'lastQuote' => $lastQuote,
         ]);
     }
-    #[Route('/quote*{id}/edit', name: 'quote_edit')]
+
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/quote/{id}/edit', name: 'quote_edit')]
     public function edit(Quote $quote, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(QuoteType::class, $quote);
@@ -141,6 +145,8 @@ class BoostController extends AbstractController
             'quote' => $quote,
         ]);
     }
+
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/quote/{id}/delete', name: 'quote_delete', methods: ['POST'])]
     public function delete(Quote $quote, Request $request, EntityManagerInterface $em): Response
     {
