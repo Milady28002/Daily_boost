@@ -1,25 +1,25 @@
 # New Daily Boost
 
-Application web développée avec Symfony permettant de gérer des citations inspirantes.
+Application web développée avec Symfony permettant de gérer des citations inspirantes à travers une interface sécurisée et responsive.
 
 ---
 
-## 🖼️ Aperçu
-![Aperçu de l'application](https://github.com/user-attachments/assets/ddc15705-08ab-4077-9b47-2ee51ed52213)
+## 🎯 Objectifs
 
----
+* Ce projet a été réalisé dans le cadre de ma formation afin de mettre en pratique :
 
-## 🎯 Objectif
-
-Ce projet a été réalisé dans le cadre de ma formation afin de mettre en pratique :
-
-* un CRUD complet
-* la gestion d’une base de données avec PostgreSQL
-* l’architecture MVC avec Symfony
+* l'architecture MVC avec Symfony
+* le développement d'un CRUD complet
+* la gestion des données avec PostgreSQL et Doctrine ORM
+* la sécurisation d'une application web
+* la gestion des utilisateurs et des rôles
+* la conception d'interfaces responsives avec Twig
 
 ---
 
 ## ✨ Fonctionnalités
+
+### Citations
 
 * Ajouter une citation
 * Consulter toutes les citations
@@ -29,15 +29,46 @@ Ce projet a été réalisé dans le cadre de ma formation afin de mettre en prat
 * Afficher une citation aléatoire (“Inspire-moi”)
 * Consulter des statistiques
 
+### Authentification
+
+* Inscription d'un utilisateur
+* Connexion
+* Déconnexion
+* Gestion des rôles
+* Restriction des actions sensibles aux administrateurs
+* Affichage conditionnel des éléments de l'interface selon le profil connecté
+
+### Interface
+
+* Navigation dynamique
+* Formulaires personnalisés
+* Design responsive
+* Adaptation mobile
 ---
 
 ## ⚙️ Stack technique
 
 * Symfony 7
+* PHP 8
 * Doctrine ORM
 * PostgreSQL
 * Twig
-* HTML / CSS
+* HTML5
+* CSS3
+* Git / GitHub
+
+---
+
+## 🔒 Sécurité
+
+L'application intègre :
+
+* Authentification Symfony
+* Hashage des mots de passe
+* Protection CSRF
+* Gestion des rôles (ROLE_ADMIN)
+* Contrôle d'accès avec IsGranted
+* Masquage des actions sensibles pour les utilisateurs non autorisés
 
 ---
 
@@ -51,13 +82,6 @@ Architecture MVC :
 
 ---
 
-## 👤 Utilisation
-
-L’application est conçue pour un usage individuel.
-
-En l’absence d’authentification, toutes les données sont globales (pas de gestion multi-utilisateur).
-
----
 
 ## 🚀 Installation
 
@@ -80,10 +104,14 @@ composer install
 
 ```bash
 php bin/console doctrine:database:create
+```
+
+5. Créer la base :
+```bash
 php bin/console doctrine:migrations:migrate
 ```
 
-5. Charger les données :
+6. Charger les données :
 
 ```bash
 php bin/console doctrine:fixtures:load
@@ -97,27 +125,16 @@ symfony server:start
 
 ---
 
-## 💥 Problèmes rencontrés
-
-Lors du développement, j’ai rencontré un problème de connexion à PostgreSQL.
-
-Solution :
-
-* réinstallation complète du service
-* recréation de la base
-* relance des migrations et fixtures
-
----
-
 ## 🚀 Évolutions possibles
 
-* authentification utilisateur
+
 * API REST
-* frontend dynamique (React / Vue)
+* Gestion des profils utilisateurs*
+* Notifications quotidiennes
 * statistiques avancées
 
 ---
 
 ## 👩‍💻 Auteur
 
-Projet réalisé par Sylvie Mendez dans le cadre de ma formation Développeur Web Full Stack.
+Projet réalisé par Sylvie Mendez dans le cadre de ma formation Graduate Développeur Web Full Stack.
