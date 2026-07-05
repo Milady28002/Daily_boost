@@ -43,7 +43,7 @@ class BoostController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_USER')]
     #[Route('/quote/new', name: 'quote_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
@@ -55,6 +55,7 @@ class BoostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $quote->setCreatedAt(new \DateTimeImmutable());
             $quote->setIsFavorite(false);
+            $quote->setSubmittedBy($this->getUser());
 
             $em->persist($quote);
             $em->flush();
@@ -160,6 +161,7 @@ class BoostController extends AbstractController
             return $this->redirectToRoute('quote_list');
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/stats', name: 'quote_stats')]
     public function stats(QuoteRepository $quoteRepository): Response
     {

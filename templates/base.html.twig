@@ -417,8 +417,9 @@
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('quote_new') }}">➕ Ajouter</a>
             {% endif %}
-
+        {% if is_granted('ROLE_ADMIN')%}
             <a href="{{ path('quote_stats') }}">📊 Stats</a>
+        {% endif %}
         </div>
 
         <div class="nav-brand">

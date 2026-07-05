@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\QuoteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: QuoteRepository::class)]
 class Quote
@@ -16,6 +17,7 @@ class Quote
 
     #[ORM\Column(length: 100)]
     private ?string $title = null;
+    
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
@@ -28,6 +30,10 @@ class Quote
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\ManyToOne]
+    private ?User $submittedBy = null;
+
 
     public function getId(): ?int
     {
@@ -93,4 +99,18 @@ class Quote
 
         return $this;
     }
+
+    public function getSubmittedBy(): ?User
+    {
+        return $this->submittedBy;
+    }
+
+    public function setSubmittedBy(?User $submittedBy): static
+    {
+        $this->submittedBy = $submittedBy;
+
+        return $this;
+    }
+    
 }
+   
