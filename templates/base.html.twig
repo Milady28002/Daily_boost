@@ -412,7 +412,7 @@
         <div class="nav-left">
             <a href="{{ path('home') }}">🏠 Accueil</a>
             <a href="{{ path('quote_list') }}">📚 Toutes les citations</a>
-            <a href="{{ path('quote_favorites') }}">⭐ Favoris</a>
+            <a href="{{ path('favorites') }}">⭐ Favoris</a>
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('quote_new') }}">➕ Ajouter</a>

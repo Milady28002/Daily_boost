@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\QuoteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
@@ -25,14 +27,23 @@ class Quote
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $author = null;
 
-    #[ORM\Column]
-    private ?bool $isFavorite = false;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne]
     private ?User $submittedBy = null;
+
+    /**
+     * @var Collection<int, Favorite>
+     */
+    #[ORM\OneToMany(targetEntity: Favorite::class, mappedBy: 'quote')]
+    private Collection $favorites;
+
+    public function __construct()
+    {
+        $this->favorites = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -76,18 +87,6 @@ class Quote
         return $this;
     }
 
-    public function isFavorite(): bool
-    {
-        return $this->isFavorite;
-    }
-
-    public function setIsFavorite(bool $isFavorite): static
-    {
-        $this->isFavorite = $isFavorite;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -108,6 +107,31 @@ class Quote
     public function setSubmittedBy(?User $submittedBy): static
     {
         $this->submittedBy = $submittedBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favorite>
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Favorite $favorite): static
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites->add($favorite);
+            $favorite->setQuote($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Favorite $favorite): static
+    {
+        $this->favorites->removeElement($favorite);
 
         return $this;
     }

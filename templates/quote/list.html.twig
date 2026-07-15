@@ -20,12 +20,14 @@
         </p>
 
         <div style="margin-top:10px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-          <a class="btn" href="{{ path('quote_toggle_favorite', {id: quote.id}) }}">
-            {% if quote.isFavorite %}
-              ⭐ Retirer des favoris
-            {% else %}
-              ☆ Mettre en favoris
-            {% endif %}
+          <a class="btn"
+            href="{{ path('quote_toggle_favorite', { id: quote.id }) }}">
+
+              {% if quote.id in favoriteQuoteIds %}
+                  ⭐ Retirer des favoris
+              {% else %}
+                  ☆ Mettre en favoris
+              {% endif %}
           </a>
         {% if is_granted('ROLE_ADMIN') %}
           <a class="btn" href="{{ path('quote_edit', {id: quote.id}) }}">
