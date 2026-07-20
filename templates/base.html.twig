@@ -414,7 +414,7 @@
             <a href="{{ path('quote_list') }}">📚 Toutes les citations</a>
             <a href="{{ path('favorites') }}">⭐ Favoris</a>
 
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('quote_new') }}">➕ Ajouter</a>
             {% endif %}
         {% if is_granted('ROLE_ADMIN')%}
