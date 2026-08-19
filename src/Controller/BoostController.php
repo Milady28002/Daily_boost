@@ -43,12 +43,21 @@ class BoostController extends AbstractController
         $favoritesCount = count($favorites);
 
         $lastQuote = $quoteRepository->findOneBy([], [
-            'createdAt' => 'DESC'
-        ]);
+        'createdAt' => 'DESC'
+    ]);
 
-        $dayNumber = (int) date('z');
-        $index = $dayNumber % count($quotes);
-        $quoteOfTheDay = $quotes[$index];
+    if (!$quotes) {
+        return $this->render('home/index.html.twig', [
+            'quote' => null,
+            'count' => $count,
+            'favoritesCount' => $favoritesCount,
+            'lastQuote' => $lastQuote,
+        ]);
+    }
+
+    $dayNumber = (int) date('z');
+    $index = $dayNumber % count($quotes);
+    $quoteOfTheDay = $quotes[$index];
 
         return $this->render('home/index.html.twig', [
             'quote' => $quoteOfTheDay,
