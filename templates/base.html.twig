@@ -7,459 +7,269 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}New Daily Boost{% endblock %}</title>
 
-  <style>
-    :root {
-        --bg: #fbf7f1;
-        --card: #ffffff;
-        --text: #2b2b2b;
-        --muted: #6c6c6c;
-        --line: #ece2d6;
-        --accent: #4f7d69;
-        --accent2: #c07a5b;
-        --shadow: 0 14px 40px rgba(43, 43, 43, .10);
-        --radius: 18px;
-    }
+    <style>
+        :root {
+            --bg: #fbf7f1;          /* crème */
+            --card: #ffffff;        /* blanc chaud */
+            --text: #2b2b2b;        /* encre */
+            --muted: #6c6c6c;       /* gris doux */
+            --line: #ece2d6;        /* beige clair */
+            --accent: #4f7d69;      /* sauge */
+            --accent2: #c07a5b;     /* terracotta */
+            --shadow: 0 14px 40px rgba(43, 43, 43, .10);
+            --radius: 18px;
+        }
 
-    * {
-        box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    body {
-        margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        background:
-            radial-gradient(900px 500px at 20% 10%, rgba(79, 125, 105, .10), transparent 55%),
-            radial-gradient(700px 450px at 85% 15%, rgba(192, 122, 91, .10), transparent 55%),
-            var(--bg);
-        color: var(--text);
-    }
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background:
+                radial-gradient(900px 500px at 20% 10%, rgba(79, 125, 105, .10), transparent 55%),
+                radial-gradient(700px 450px at 85% 15%, rgba(192, 122, 91, .10), transparent 55%),
+                var(--bg);
+            color: var(--text);
+        }
 
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-
-    /* ===== MOBILE FIRST : styles par défaut ===== */
-
-    .container {
-        width: 92vw;
-        margin: 0 auto;
-    }
-
-    .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 18px 0;
-    }
-
-    .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 700;
-        letter-spacing: .2px;
-    }
-
-    .dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--accent), var(--accent2));
-        box-shadow: 0 0 0 5px rgba(79, 125, 105, .12);
-    }
-
-    .nav-links {
-        display: none;
-        gap: 12px;
-    }
-
-    .pill {
-        padding: 8px 12px;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, .65);
-    }
-
-    .pill:hover {
-        border-color: rgba(79, 125, 105, .35);
-    }
-
-    main {
-        padding: 18px 0 44px;
-    }
-
-    .hero {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        padding: 20px;
-        overflow: hidden;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: rgba(255, 255, 255, .85);
-        box-shadow: var(--shadow);
-    }
-
-    .hero > * {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .kicker {
-        color: var(--muted);
-        font-weight: 600;
-        letter-spacing: .6px;
-        text-transform: uppercase;
-        font-size: 12px;
-    }
-
-    h1 {
-        margin: 0;
-        font-size: 32px;
-        line-height: 1.08;
-    }
-
-    .lead {
-        margin: 0;
-        color: var(--muted);
-        font-size: 16px;
-        line-height: 1.7;
-        max-width: 100%;
-    }
-
-    .cta-row {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-        margin-top: 4px;
-    }
-
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        padding: 10px 14px;
-        border-radius: 14px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, .75);
-        font-weight: 600;
-        white-space: normal;
-    }
-
-    .btn.primary {
-        border: none;
-        background: linear-gradient(135deg, var(--accent), var(--accent2));
-        color: #fff;
-        box-shadow: 0 10px 22px rgba(79, 125, 105, .22);
-    }
-
-    .btn:hover {
-        transform: translateY(-1px);
-    }
-
-    .btn:active {
-        transform: translateY(0);
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 14px;
-        margin-top: 14px;
-    }
-
-    .card {
-        grid-column: span 1;
-        width: 100%;
-        max-width: 100%;
-        padding: 20px;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        background: rgba(255, 255, 255, .9);
-        font-style: italic;
-    }
-
-    .card h3 {
-        margin: 0 0 6px;
-        font-size: 16px;
-    }
-
-    .card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.6;
-    }
-
-    footer {
-        padding: 18px 0 30px;
-        color: rgba(43, 43, 43, .55);
-        border-top: 1px solid var(--line);
-    }
-
-    code.badge {
-        padding: 2px 8px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, .7);
-        color: rgba(43, 43, 43, .78);
-    }
-
-    .flash-success {
-        background: #dff5e1;
-        color: #2f6b35;
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-
-    .main-nav {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 14px;
-        padding: 18px 0;
-    }
-
-    .nav-left,
-    .nav-right {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        flex-wrap: wrap;
-        width: 100%;
-    }
-
-    .nav-brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 700;
-        white-space: nowrap;
-    }
-
-    .brand-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--accent), var(--accent2));
-        box-shadow: 0 0 0 5px rgba(79, 125, 105, .12);
-    }
-
-    .user-info {
-        color: var(--muted);
-        font-size: 14px;
-    }
-
-    /* ===== Formulaires Connexion / Inscription ===== */
-
-    .auth-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 40px;
-    }
-
-    .auth-card {
-        width: 100%;
-        max-width: 500px;
-        padding: 40px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, .85);
-        border: 1px solid var(--line);
-        box-shadow: var(--shadow);
-    }
-
-    .auth-card h1 {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label,
-    .auth-card form > div > label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-    }
-
-    .form-group input,
-    .auth-card input {
-        width: 100%;
-        display: block;
-        padding: 12px 16px;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: white;
-        font-size: 15px;
-    }
-
-    .auth-card form > div {
-        margin-bottom: 20px;
-    }
-
-    .auth-card input[type="checkbox"] {
-        width: auto;
-        display: inline-block;
-        padding: 0;
-    }
-
-    .remember-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin: 25px 0;
-    }
-
-    .remember-row input {
-        width: auto;
-        margin: 0;
-    }
-
-    .remember-row label {
-        margin: 0;
-        cursor: pointer;
-    }
-
-    .auth-card .btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .flash-error {
-        background: #fde7e7;
-        color: #8d2f2f;
-        padding: 12px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-    }
-
-    .checkbox-row > div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin: 25px 0;
-    }
-
-    .checkbox-row input[type="checkbox"] {
-        width: auto;
-        margin: 0;
-    }
-
-    .checkbox-row label {
-        margin: 0;
-        cursor: pointer;
-    }
-
-    /* ===== ÉCRANS PLUS LARGES : tablette / ordinateur ===== */
-
-    @media (min-width: 701px) {
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
         .container {
             width: min(980px, 92vw);
+            margin: 0 auto;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: .2px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            box-shadow: 0 0 0 5px rgba(79, 125, 105, .12);
         }
 
         .nav-links {
             display: flex;
+            gap: 12px;
         }
 
-        .main-nav {
-            flex-direction: row;
-            justify-content: space-between;
-            text-align: left;
-            gap: 24px;
+        .pill {
+            padding: 8px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .65);
         }
 
-        .nav-left,
-        .nav-right {
-            justify-content: flex-start;
-            width: auto;
+        .pill:hover {
+            border-color: rgba(79, 125, 105, .35);
+        }
+
+        main {
+            padding: 18px 0 44px;
         }
 
         .hero {
             display: grid;
+            gap: 16px;
             padding: 26px;
-            overflow: visible;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, .85);
+            box-shadow: var(--shadow);
         }
 
-        .hero > * {
-            width: auto;
+        .kicker {
+            color: var(--muted);
+            font-weight: 600;
+            letter-spacing: .6px;
+            text-transform: uppercase;
+            font-size: 12px;
         }
 
         h1 {
+            margin: 0;
             font-size: clamp(28px, 4vw, 44px);
+            line-height: 1.08;
         }
 
         .lead {
+            margin: 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.7;
             max-width: 60ch;
         }
 
         .cta-row {
-            flex-direction: column;
-            align-items: flex-start;
-            width: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
         }
 
         .btn {
-            width: auto;
-            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .75);
+            font-weight: 600;
+        }
+
+        .btn.primary {
+            border: none;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            box-shadow: 0 10px 22px rgba(79, 125, 105, .22);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
         }
 
         .grid {
+            display: grid;
             grid-template-columns: repeat(12, 1fr);
+            gap: 14px;
+            margin-top: 14px;
         }
 
         .card {
             grid-column: span 6;
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, .9);
+            font-style: italic;
         }
 
-        .card .btn {
-            width: 100%;
-            white-space: normal;
-            text-align: center;
+        .card h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        footer {
+            padding: 18px 0 30px;
+            color: rgba(43, 43, 43, .55);
+            border-top: 1px solid var(--line);
+        }
+
+        code.badge {
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .7);
+            color: rgba(43, 43, 43, .78);
+        }
+
+        .flash-success {
+            background: #dff5e1;
+            color: #2f6b35;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 18px 0;
+        }
+
+        .nav-left,
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .brand-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            box-shadow: 0 0 0 5px rgba(79, 125, 105, .12);
+        }
+
+        .user-info {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* ===== Formulaires Connexion / Inscription / Citation ===== */
+
+        .auth-container {
+            display: flex;
             justify-content: center;
-        }
-    } 
-    /* ===== Formulaires Connexion / Inscription ===== */
-
-        .auth-container{
-            display:flex;
-            justify-content:center;
-            margin-top:40px;
+            margin-top: 40px;
         }
 
-        .auth-card{
-            width:100%;
-            max-width:500px;
-            padding:40px;
-            border-radius:20px;
-            background:rgba(255,255,255,.85);
-            border:1px solid var(--line);
-            box-shadow:var(--shadow);
+        .auth-card {
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .85);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
         }
 
-        .auth-card h1{
-            text-align:center;
-            margin-bottom:30px;
+        .auth-card h1 {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        .form-group{
-            margin-bottom:20px;
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        .form-group label{
-            display:block;
-            margin-bottom:8px;
-            font-weight:600;
+        .form-group label,
+        .auth-card form > div > label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .form-group input,
@@ -480,141 +290,187 @@
             resize: vertical;
         }
 
-        .remember-row{
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:10px;
-            margin:25px 0;
+        .auth-card form > div {
+            margin-bottom: 20px;
         }
 
-        .remember-row input{
-            width:auto;
-            margin:0;
+        .auth-card input[type="checkbox"] {
+            width: auto;
+            display: inline-block;
+            padding: 0;
         }
 
-        .remember-row label{
-            margin:0;
-            cursor:pointer;
+        .remember-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
         }
 
-        .auth-card .btn{
-            width:100%;
-            justify-content:center;
+        .remember-row input {
+            width: auto;
+            margin: 0;
         }
 
-        .flash-error{
-            background:#fde7e7;
-            color:#8d2f2f;
-            padding:12px;
-            border-radius:10px;
-            margin-bottom:20px;
+        .remember-row label {
+            margin: 0;
+            cursor: pointer;
         }
 
-            .auth-card form > div{
-            margin-bottom:20px;
+        .auth-card .btn {
+            width: 100%;
+            justify-content: center;
         }
 
-        .auth-card form > div > label{
-            display:block;
-            margin-bottom:8px;
-            font-weight:600;
+        .flash-error {
+            background: #fde7e7;
+            color: #8d2f2f;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
-        .auth-card input{
-            width:100%;
-            display:block;
-            padding:12px 16px;
-            border:1px solid var(--line);
-            border-radius:14px;
-            background:white;
-            font-size:15px;
+        .checkbox-row > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
         }
 
-        .auth-card input[type="checkbox"]{
-            width:auto;
-            display:inline-block;
-            padding:0;
+        .checkbox-row input[type="checkbox"] {
+            width: auto;
+            margin: 0;
         }
 
-        .auth-card form > div{
-            margin-bottom:20px;
+        .checkbox-row label {
+            margin: 0;
+            cursor: pointer;
         }
 
-        .auth-card form > div > label{
-            display:block;
-            margin-bottom:8px;
-            font-weight:600;
-        }
+        @media (max-width: 700px) {
+            .container {
+                width: 92vw;
+            }
 
-        .checkbox-row > div{
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:10px;
-            margin:25px 0;
-        }
+            .nav-links {
+                display: none;
+            }
 
-        .checkbox-row input[type="checkbox"]{
-            width:auto;
-            margin:0;
-        }
+            .main-nav {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 14px;
+            }
 
-        .checkbox-row label{
-            margin:0;
-            cursor:pointer;
-        }
+            .nav-left,
+            .nav-right {
+                justify-content: center;
+                width: 100%;
+            }
 
+            .hero {
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
+                overflow: hidden;
+            }
+
+            .hero > * {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .cta-row {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .cta-row .btn,
+            .btn {
+                width: 100%;
+                justify-content: center;
+                white-space: normal;
+            }
+
+            .lead {
+                max-width: 100%;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                grid-column: span 1;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .auth-card {
+                padding: 25px;
+            }
+        }
     </style>
 </head>
+
 <body>
-        {% for message in app.flashes('success') %}
-    <div class="flash-success">
-        {{ message }}
-    </div>
-{% endfor %}
-<header class="container">
-    <nav class="main-nav">
-        <div class="nav-left">
-            <a href="{{ path('home') }}">🏠 Accueil</a>
-            <a href="{{ path('quote_list') }}">📚 Toutes les citations</a>
-            <a href="{{ path('favorites') }}">⭐ Favoris</a>
-
-            {% if is_granted('ROLE_USER') %}
-                <a href="{{ path('quote_new') }}">➕ Ajouter</a>
-            {% endif %}
-        {% if is_granted('ROLE_ADMIN')%}
-            <a href="{{ path('quote_stats') }}">📊 Stats</a>
-        {% endif %}
+    {% for message in app.flashes('success') %}
+        <div class="flash-success">
+            {{ message }}
         </div>
+    {% endfor %}
 
-        <div class="nav-brand">
-            <span class="brand-dot"></span>
-            <strong>New Daily Boost</strong>
+    <header class="container">
+        <nav class="main-nav">
+            <div class="nav-left">
+                <a href="{{ path('home') }}">🏠 Accueil</a>
+                <a href="{{ path('quote_list') }}">📚 Toutes les citations</a>
+                <a href="{{ path('favorites') }}">⭐ Favoris</a>
+
+                {% if is_granted('ROLE_USER') %}
+                    <a href="{{ path('quote_new') }}">➕ Ajouter</a>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('quote_stats') }}">📊 Stats</a>
+                {% endif %}
+            </div>
+
+            <div class="nav-brand">
+                <span class="brand-dot"></span>
+                <strong>New Daily Boost</strong>
+            </div>
+
+            <div class="nav-right">
+                {% if app.user %}
+                    <span class="user-info">{{ app.user.userIdentifier }}</span>
+                    <a class="pill" href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a class="pill" href="{{ path('app_login') }}">Connexion</a>
+                    <a class="pill" href="{{ path('app_register') }}">Inscription</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer class="container">
+        <div>
+            <span>By Milady</span>
+            · <code class="badge">Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</code>
+            · <span>{{ "now"|date("Y") }}</span>
         </div>
-
-        <div class="nav-right">
-            {% if app.user %}
-                <span class="user-info">{{ app.user.userIdentifier }}</span>
-                <a class="pill" href="{{ path('app_logout') }}">Déconnexion</a>
-            {% else %}
-                <a class="pill" href="{{ path('app_login') }}">Connexion</a>
-                <a class="pill" href="{{ path('app_register') }}">Inscription</a>
-            {% endif %}
-        </div>
-    </nav>
-</header>
-
-<main class="container">
-    {% block body %}{% endblock %}
-</main>
-
-<footer class="container">
-    <div>
-        <span>By Milady</span>
-        · <code class="badge">Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</code>
-        · <span>{{ "now"|date("Y") }}</span>
-    </div>
-</footer>
+    </footer>
 </body>
+
 </html>
