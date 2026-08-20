@@ -1,17 +1,23 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Ajouter une citation{% endblock %}
-
 {% block body %}
 
-<h1>Ajouter une citation</h1>
+<div class="auth-container">
+    <div class="auth-card">
 
-{{ form_start(form) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.content) }}
-    {{ form_row(form.author) }}
+        <h1>Ajouter une citation</h1>
 
-    <button type="submit">Enregistrer</button>
-{{ form_end(form) }}
+        {{ form_start(form) }}
+
+            {{ form_row(form.title) }}
+            {{ form_row(form.content) }}
+            {{ form_row(form.author) }}
+
+            <button type="submit" class="btn primary">
+                Enregistrer
+            </button>
+
+        {{ form_end(form) }}
+
+    </div>
+</div>
 
 {% endblock %}
