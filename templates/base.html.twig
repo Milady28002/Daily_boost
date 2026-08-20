@@ -1,3 +1,4 @@
+```twig
 {# templates/base.html.twig #}
 <!DOCTYPE html>
 <html lang="fr">
@@ -9,13 +10,13 @@
 
     <style>
         :root {
-            --bg: #fbf7f1;          /* crème */
-            --card: #ffffff;        /* blanc chaud */
-            --text: #2b2b2b;        /* encre */
-            --muted: #6c6c6c;       /* gris doux */
-            --line: #ece2d6;        /* beige clair */
-            --accent: #4f7d69;      /* sauge */
-            --accent2: #c07a5b;     /* terracotta */
+            --bg: #fbf7f1;
+            --card: #ffffff;
+            --text: #2b2b2b;
+            --muted: #6c6c6c;
+            --line: #ece2d6;
+            --accent: #4f7d69;
+            --accent2: #c07a5b;
             --shadow: 0 14px 40px rgba(43, 43, 43, .10);
             --radius: 18px;
         }
@@ -184,6 +185,7 @@
             color: rgba(43, 43, 43, .55);
             border-top: 1px solid var(--line);
         }
+
         .footer-content {
             display: flex;
             flex-direction: column;
@@ -216,8 +218,6 @@
             color: rgba(43, 43, 43, .78);
         }
 
-<<<<<<< HEAD
-=======
         /* ===== Pages légales ===== */
 
         .legal-page {
@@ -250,12 +250,7 @@
             color: var(--accent);
             text-decoration: underline;
         }
-        @media (max-width: 700px){
-            .card{ grid-column: span 12; }
-            .nav-links{ display:none; }
-            .legal-page {padding: 25px;}
-        }
->>>>>>> dev
+
         .flash-success {
             background: #dff5e1;
             color: #2f6b35;
@@ -412,6 +407,45 @@
             cursor: pointer;
         }
 
+        .checkbox-row a,
+        .privacy-info a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .privacy-info {
+            margin: 20px 0;
+            padding: 14px 16px;
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            background: rgba(79, 125, 105, .06);
+        }
+
+        .privacy-info p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .privacy-info p + p {
+            margin-top: 6px;
+        }
+
+        .delete-account-link {
+            padding: 0;
+            border: 0;
+            background: none;
+            color: #a94442;
+            font-size: 12px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .delete-account-link:hover {
+            opacity: .75;
+        }
+
         @media (max-width: 700px) {
             .container {
                 width: 92vw;
@@ -479,46 +513,11 @@
             .auth-card {
                 padding: 25px;
             }
-        }
-        .checkbox-row a,
-        .privacy-info a {
-            color: var(--accent);
-            text-decoration: underline;
-        }
 
-        .privacy-info {
-            margin: 20px 0;
-            padding: 14px 16px;
-            border-left: 3px solid var(--accent);
-            border-radius: 8px;
-            background: rgba(79, 125, 105, .06);
+            .legal-page {
+                padding: 25px;
+            }
         }
-
-        .privacy-info p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .privacy-info p + p {
-            margin-top: 6px;
-        }
-
-        .delete-account-link {
-            padding: 0;
-            border: 0;
-            background: none;
-            color: #a94442;
-            font-size: 12px;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .delete-account-link:hover {
-            opacity: .75;
-        }
-
     </style>
 </head>
 
@@ -553,7 +552,26 @@
             <div class="nav-right">
                 {% if app.user %}
                     <span class="user-info">{{ app.user.userIdentifier }}</span>
-                    <a class="pill" href="{{ path('app_logout') }}">Déconnexion</a>
+
+                    <a class="pill" href="{{ path('app_logout') }}">
+                        Déconnexion
+                    </a>
+
+                    <form
+                        method="post"
+                        action="{{ path('account_delete') }}"
+                        onsubmit="return confirm('Voulez-vous vraiment supprimer définitivement votre compte Daily Boost ? Cette action est irréversible.');"
+                    >
+                        <input
+                            type="hidden"
+                            name="_token"
+                            value="{{ csrf_token('delete_account_' ~ app.user.id) }}"
+                        >
+
+                        <button type="submit" class="delete-account-link">
+                            Supprimer mon compte
+                        </button>
+                    </form>
                 {% else %}
                     <a class="pill" href="{{ path('app_login') }}">Connexion</a>
                     <a class="pill" href="{{ path('app_register') }}">Inscription</a>
@@ -565,46 +583,6 @@
     <main class="container">
         {% block body %}{% endblock %}
     </main>
-
-    <footer class="container">
-        <div>
-            <span>By Milady</span>
-            · <code class="badge">Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</code>
-            · <span>{{ "now"|date("Y") }}</span>
-        </div>
-<<<<<<< HEAD
-=======
-
-        <div class="nav-right">
-            {% if app.user %}
-                <span class="user-info">{{ app.user.userIdentifier }}</span>
-                <a class="pill" href="{{ path('app_logout') }}">Déconnexion</a>
-                <form
-                    method="post"
-                    action="{{ path('account_delete') }}"
-                    onsubmit="return confirm('Voulez-vous vraiment supprimer définitivement votre compte Daily Boost ? Cette action est irréversible.');"
-                >
-                    <input
-                        type="hidden"
-                        name="_token"
-                        value="{{ csrf_token('delete_account_' ~ app.user.id) }}"
-                    >
-
-                    <button type="submit" class="delete-account-link">
-                        Supprimer mon compte
-                    </button>
-                </form>
-            {% else %}
-                <a class="pill" href="{{ path('app_login') }}">Connexion</a>
-                <a class="pill" href="{{ path('app_register') }}">Inscription</a>
-            {% endif %}
-        </div>
-    </nav>
-</header>
-
-<main class="container">
-    {% block body %}{% endblock %}
-</main>
 
     <footer class="container">
         <div class="footer-content">
@@ -634,8 +612,8 @@
             </nav>
 
         </div>
->>>>>>> dev
     </footer>
 </body>
 
 </html>
+```
