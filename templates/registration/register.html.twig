@@ -15,8 +15,35 @@
             {{ form_row(registrationForm.plainPassword) }}
 
             <div class="checkbox-row">
-                {{ form_row(registrationForm.agreeTerms) }}
+                <div>
+                    {{ form_widget(registrationForm.agreeTerms) }}
+
+                    <label for="{{ registrationForm.agreeTerms.vars.id }}">
+                        J'accepte les
+                        <a href="{{ path('terms') }}" target="_blank" rel="noopener noreferrer">
+                            conditions d'utilisation
+                        </a>
+                    </label>
             </div>
+
+            <div class="privacy-info">
+                <p>
+                    Votre adresse e-mail est utilisée uniquement pour créer et gérer
+                    votre compte Daily Boost et permettre le fonctionnement des
+                    fonctionnalités associées.
+                </p>
+
+                <p>
+                    Pour en savoir plus sur l'utilisation de vos données et sur vos droits,
+                    consultez notre
+                    <a href="{{ path('privacy_policy') }}" target="_blank" rel="noopener noreferrer">
+                        politique de confidentialité
+                    </a>.
+                </p>
+            </div>
+
+    {{ form_errors(registrationForm.agreeTerms) }}
+</div>
 
             <button type="submit" class="btn primary">
                 S'inscrire
