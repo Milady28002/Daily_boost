@@ -17,7 +17,8 @@ class Favorite
     #[ORM\JoinColumn(nullable: false)]
     private ?Quote $quote = null;
 
-    #[ORM\ManyToOne(inversedBy: 'favorites')]
+   #[ORM\ManyToOne(inversedBy: 'favorites')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
     private ?User $owner = null;
 
     #[ORM\Column(length: 255, nullable: true)]
